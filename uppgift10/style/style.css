@@ -1,0 +1,64 @@
+body {
+    margin: 0%;
+    background-color: black;
+}
+
+.header {
+    width: auto;
+
+    background: rgb(220,8,140);
+    background-image: linear-gradient(90deg,#ab058b 0,indigo 100%);
+  
+}
+
+.header #title {
+    margin-left: 5px;
+    height: 52;
+
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 34;
+    color: white;
+
+    display: inline-block;
+    
+}
+
+.header #title img {
+    margin-right: 4px;
+    width: 24px;
+    height: 24px;
+}
+
+.header #menu {
+    display: inline-block;
+    float: right;
+}
+
+.header #menu button {
+    font-size: medium;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: medium;
+    color: white;
+
+    width: min-content;
+
+    margin-top: 10px;
+    margin-right: 5px;
+    height: 28px;
+
+    border-width: 1px;
+    border-radius: 2px;
+    border-style: solid;
+    border-color: white;
+
+    background-color: transparent;
+
+
+}
+
+.header #menu button:hover {background-color: whitesmoke;}
+
+.desktop {
+    margin: 0%;
+    background-color: grey;
+}

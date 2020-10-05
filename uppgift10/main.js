@@ -21,3 +21,50 @@
  *   SOFTWARE.
  */
 
+var data = new Vue ({
+    data: {
+        gist_id: prompt("gist id")
+    }
+})
+
+var btn_load_event = new Vue({
+    el: '#btn_load',
+    methods: {
+        fn_load: function (event) {
+            if (event) {
+                console.log(data._data.gist_id)
+            }
+            else {
+                alert("something went wrong!")
+            }
+        }
+    }
+})
+
+var btn_save_event = new Vue({
+    el: '#btn_save',
+    methods: {
+        fn_save: function (event) {
+            if (event) {
+
+            }
+            else {
+                alert("something went wrong!")
+            }
+        }
+    }
+})
+
+var btn_menu_event = new Vue({
+    el: '#btn_menu',
+    methods: {
+        fn_menu: function (event) {
+            if (event) {
+
+            }
+            else {
+                alert("something went wrong!")
+            }
+        }
+    }
+})
