@@ -7,21 +7,22 @@ body {
 .header {
     width: auto;
 
-    background: rgb(220,8,140);
-    background-image: linear-gradient(90deg,#ab058b 0,indigo 100%);
-  
+    background: rgb(220, 8, 140);
+    background-image: linear-gradient(90deg, #ab058b 0, indigo 100%);
+
 }
 
 .header #title {
     margin-left: 5px;
-    height: 52;
 
+
+    /*TODOchange font to something cooler later*/
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 34;
     color: white;
 
     display: inline-block;
-    
+
 }
 
 .header #title img {
@@ -30,17 +31,13 @@ body {
     height: 24px;
 }
 
-.header #title img:hover {
-    height: 32;
-    width: 32;
-}
-
 .header #menu {
     display: inline-block;
     float: right;
 }
 
 .header #menu button {
+    /*TODOchange font to something cooler later*/
     font-size: medium;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: medium;
@@ -51,7 +48,7 @@ body {
 
     margin-top: 10px;
     margin-right: 5px;
-    
+
 
     border-width: 1px;
     border-radius: 2px;
@@ -63,10 +60,37 @@ body {
 
 }
 
-.header #menu button:hover {background-color: rgb(220,8,140);}
+.header #menu button:hover {
+    background-color: rgb(220, 8, 140);
+}
 
 /*the style for the main attraction*/
 .desktop {
     margin: 0%;
     background-color: grey;
+}
+
+@media all and (width: 375px) {
+    .header #title {
+        margin-top: 0px;
+        font-size: 24px;
+
+        height: fit-content;
+    }
+
+    .header #title img {
+        margin-right: 4px;
+        height: 18px;
+        width: 18px;
+    }
+
+    .header #menu button {
+        width: 54px;
+        height: 24px;
+        margin: 2px;
+
+        text-align: center;
+    }
+
+
 }

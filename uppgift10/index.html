@@ -5,13 +5,20 @@
     <!--vue src -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
+    <script type="module">
+        import { Octokit, App } from "https://cdn.pika.dev/octokit";
+    </script>
+
     <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
     <div class="header">
         <div id="title">
-            <a><a href="https://www.ntigymnasiet.se/karlstad/"><img src="https://www.ntigymnasiet.se/wp-content/themes/nti/img/nti_logo_footer.svg" alt=""></a>Project Manager</a>
+            <!--this have to be like that else it will mess with the website-->
+            <a><a href="https://www.ntigymnasiet.se/karlstad/"><img
+                        src="https://www.ntigymnasiet.se/wp-content/themes/nti/img/nti_logo_footer.svg"
+                        alt=""></a>Project Manager</a>
         </div>
         <div id="menu">
             <button id="btn_load" v-on:click="fn_load">Load</button>
@@ -24,7 +31,10 @@
 
     </div>
 
-    <script src="main.js"></script>
+    <div class="footer">
+        <a>hello</a>
+    </div>
+    <script src="src/main.js"></script>
+    <script src="src/gist.js"></script>
 </body>
-
 </html>
