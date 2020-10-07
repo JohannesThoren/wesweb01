@@ -21,25 +21,11 @@
  *   SOFTWARE.
  */
 
-async function fetch_api() {
-    const url = "https://api.github.com"
-    const response = await fetch(url)
-    const result = await response.json()
 
-    console.log(result)
+function add_task() {
+
 }
 
-async function authenticate_user() {
-    const headers = {
-        "Authorization" : "TOKEN "+ usrtoken
-    }
-    const url = "https://api.github.com/authorizations"
-    const response = await fetch(url, {
-        "method": "GET",
-        "headers": headers
-    })
-    console.log(response)
-    const result = await response.json()
+function remove_task() {
 
-    console.log(result)
 }

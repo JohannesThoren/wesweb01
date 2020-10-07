@@ -20,12 +20,32 @@
  *   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *   SOFTWARE.
  */
-let usr_data = {
-    auth_token: "",
-    gist_id: ""
+
+async function fetch_api() {
+    const url = "https://api.github.com"
+    const response = await fetch(url)
+    const result = await response.json()
+
+    console.log(result)
 }
 
-let gists_data = {
-    request_result: "",
+async function get_gist_data() {
+    const request = new Request("https://api.github.com/gists/"+usr_data.gist_id, {
+        method: "GET",
+        headers: { "Authorization": "token " + usr_data.auth_token }
+    })
+
+    //fetches the data from github
+    const response = await fetch(request)
+
+    //const response = await fetch(url);
+    const result = await response.json()
+
+    //console.log("test1")
+    gists_data.request_result = result
+}
+
+async function get_manager_gist() {
 
 }
+//6d514a76f8b55a8f555c838fdd0fb7b7dea9d03a

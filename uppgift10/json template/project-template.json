@@ -1,0 +1,10 @@
+{
+    "project-name": "name",
+    "date": "date",
+    "author": "author-id",
+    "lists": {
+        "list1": [],
+        "list2": [],
+        "list3": []
+    }
+}

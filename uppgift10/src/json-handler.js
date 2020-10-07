@@ -20,12 +20,7 @@
  *   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *   SOFTWARE.
  */
-let usr_data = {
-    auth_token: "",
-    gist_id: ""
-}
 
-let gists_data = {
-    request_result: "",
+function parse_json_data() {
 
 }

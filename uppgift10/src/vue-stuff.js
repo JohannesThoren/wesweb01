@@ -21,15 +21,12 @@
  *   SOFTWARE.
  */
 
-let usrtoken = ""
-
 var btn_github_login = new Vue({
     el: '#btn_github_login',
     methods: {
         fn_github_login: function (event) {
             if (event) {
-                usrtoken = prompt("github usertoken")
-                authenticate_user()
+                usr_data.auth_token = prompt("github usertoken")
             }
             else {
                 alert("something went wrong!")
@@ -43,7 +40,7 @@ var btn_load_event = new Vue({
     methods: {
         fn_load: function (event) {
             if (event) {
-                console.log(data._data.gist_id)
+                get_gist_data()
             }
             else {
                 alert("something went wrong!")
