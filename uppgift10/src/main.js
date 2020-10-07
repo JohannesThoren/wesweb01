@@ -21,3 +21,4 @@
  *   SOFTWARE.
  */
 
+fetch_api()

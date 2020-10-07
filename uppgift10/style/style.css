@@ -46,7 +46,7 @@ body {
     width: min-content;
     height: 28px;
 
-    margin-top: 10px;
+    margin-top: 6px;
     margin-right: 5px;
 
 
@@ -70,27 +70,3 @@ body {
     background-color: grey;
 }
 
-@media all and (width: 375px) {
-    .header #title {
-        margin-top: 0px;
-        font-size: 24px;
-
-        height: fit-content;
-    }
-
-    .header #title img {
-        margin-right: 4px;
-        height: 18px;
-        width: 18px;
-    }
-
-    .header #menu button {
-        width: 54px;
-        height: 24px;
-        margin: 2px;
-
-        text-align: center;
-    }
-
-
-}

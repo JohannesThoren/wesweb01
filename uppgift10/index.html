@@ -5,11 +5,10 @@
     <!--vue src -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
-    <script type="module">
-        import { Octokit, App } from "https://cdn.pika.dev/octokit";
-    </script>
-
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/@media.css">
+
+    <script src="src/gist-handling.js"></script>
 </head>
 
 <body>
@@ -23,7 +22,7 @@
         <div id="menu">
             <button id="btn_load" v-on:click="fn_load">Load</button>
             <button id="btn_save" v-on:click="">Save</button>
-            <button id="btn_menu" v-on:click="">Menu</button>
+            <button id="btn_github_login" v-on:click="fn_github_login">Login</button>
         </div>
     </div>
 
@@ -35,6 +34,6 @@
         <a>hello</a>
     </div>
     <script src="src/main.js"></script>
-    <script src="src/gist.js"></script>
+    <script src="src/vue-stuff.js"></script>
 </body>
 </html>

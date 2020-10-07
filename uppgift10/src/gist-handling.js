@@ -21,61 +21,25 @@
  *   SOFTWARE.
  */
 
-let usrtoken = ""
+async function fetch_api() {
+    const url = "https://api.github.com"
+    const response = await fetch(url)
+    const result = await response.json()
 
-var btn_github_login = new Vue({
-    el: '#btn_github_login',
-    methods: {
-        fn_github_login: function (event) {
-            if (event) {
-                usrtoken = prompt("github usertoken")
-                authenticate_user()
-            }
-            else {
-                alert("something went wrong!")
-            }
-        }
+    console.log(result)
+}
+
+async function authenticate_user() {
+    const headers = {
+        "Authorization" : "TOKEN "+ usrtoken
     }
-})
+    const url = "https://api.github.com/authorizations"
+    const response = await fetch(url, {
+        "method": "GET",
+        "headers": headers
+    })
+    console.log(response)
+    const result = await response.json()
 
-var btn_load_event = new Vue({
-    el: '#btn_load',
-    methods: {
-        fn_load: function (event) {
-            if (event) {
-                console.log(data._data.gist_id)
-            }
-            else {
-                alert("something went wrong!")
-            }
-        }
-    }
-})
-
-var btn_save_event = new Vue({
-    el: '#btn_save',
-    methods: {
-        fn_save: function (event) {
-            if (event) {
-
-            }
-            else {
-                alert("something went wrong!")
-            }
-        }
-    }
-})
-
-var btn_menu_event = new Vue({
-    el: '#btn_menu',
-    methods: {
-        fn_menu: function (event) {
-            if (event) {
-
-            }
-            else {
-                alert("something went wrong!")
-            }
-        }
-    }
-})
+    console.log(result)
+}
