@@ -1,0 +1,39 @@
+body {
+    background-color: darkgray;
+    margin: 0px
+}
+
+.header {
+    background-color: rgb(50, 50, 50);
+    margin: 0;
+    
+    color: white;
+    font-size: 32;
+    font-family: 'Roboto Slab', serif;
+
+    padding: 5px;
+
+    box-shadow: 0px 8px 16px 0px black;
+}
+
+.header .menu{
+    color: white;
+    text-decoration: none;
+
+    padding: 2px;
+    float: right;
+}
+
+.header .menu a {
+    color: white;
+    text-decoration: none;
+}
+
+.header .menu a:hover{
+
+    background-color: grey;
+}
+
+.footer {
+    background-color: rgb(25, 25, 25);
+}

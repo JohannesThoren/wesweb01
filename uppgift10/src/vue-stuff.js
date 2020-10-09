@@ -40,6 +40,7 @@ var btn_load_event = new Vue({
     methods: {
         fn_load: function (event) {
             if (event) {
+                if (!gists_data.gist_id) {gists_data.gist_id = prompt("gist id")}
                 get_gist_data()
             }
             else {

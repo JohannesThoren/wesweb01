@@ -21,11 +21,10 @@
  *   SOFTWARE.
  */
 let usr_data = {
-    auth_token: "",
-    gist_id: ""
+    auth_token: ""
 }
 
 let gists_data = {
     request_result: "",
-
+    gist_id: ""
 }

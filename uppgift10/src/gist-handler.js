@@ -30,7 +30,7 @@ async function fetch_api() {
 }
 
 async function get_gist_data() {
-    const request = new Request("https://api.github.com/gists/"+usr_data.gist_id, {
+    const request = new Request("https://api.github.com/gists/"+gists_data.gist_id, {
         method: "GET",
         headers: { "Authorization": "token " + usr_data.auth_token }
     })
@@ -45,7 +45,25 @@ async function get_gist_data() {
     gists_data.request_result = result
 }
 
-async function get_manager_gist() {
 
+async function update_gist_data(data) {
+    const request = new Request("https://api.github.com/gists/", {
+        method: "PATCH",
+        headers: {
+            "gists_id": "bd4664c38b337e1a5252604c2df5071c",
+            "files": "test-gist",
+            "Authorization": "token " + usr_data.auth_token, 
+        }
+    })
+
+    //fetches the data from github
+    const response = await fetch(request)
+
+    //const response = await fetch(url);
+    const result = await response.json()
+
+    console.log(result)
 }
 //6d514a76f8b55a8f555c838fdd0fb7b7dea9d03a
+
+//bd4664c38b337e1a5252604c2df5071c
