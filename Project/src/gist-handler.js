@@ -20,11 +20,24 @@
  *   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *   SOFTWARE.
  */
-let usr_data = {
-    auth_token: ""
-}
 
-let gists_data = {
-    request_result: "",
-    gist_id: ""
+async function setupGist() {
+    const url = "https://api.github.com/gists"
+
+    const request = new Request(url, {
+        method: "POST",
+        headers: {
+            "authorization": "token " + usr.token,
+        },
+        body: {
+            "files": "{}"
+        }
+    })
+
+    console.log (request)
+
+    const response = await fetch(request)
+    const result = await response.json()
+
+    console.log(result)
 }

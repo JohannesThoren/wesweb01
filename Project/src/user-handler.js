@@ -21,6 +21,52 @@
  *   SOFTWARE.
  */
 
-function parse_json_data() {
+let usr = {
+    uname: "",
+    token: "",
+    main_gist: ""
+}
 
+function create_cookie(cookie_name, value) {
+    document.cookie = cookie_name + "=" + value
+}
+
+function get_cookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function get_user_info_from_cookies(github_uname) {
+
+    check(github_uname)
+    
+    usr.uname = github_uname
+    usr.token = get_cookie(github_uname + ".token"),
+    usr.main_gist = get_cookie(github_uname + ".main_gist")
+
+    console.log(usr)
+}
+
+function check(github_uname) {
+
+    if (get_cookie(github_uname + ".token") == "") {
+        usr.token = prompt("github personal access token")
+
+        if(usr.token != "") {create_cookie(github_uname + ".token", usr.token)}
+
+    }
+    if (get_cookie(github_uname + ".main_gist") == "") {
+        
+    }
 }

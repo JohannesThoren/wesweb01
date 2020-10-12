@@ -21,11 +21,4 @@
  *   SOFTWARE.
  */
 
-
-function add_task() {
-
-}
-
-function remove_task() {
-
-}
+get_user_info_from_cookies(prompt("github username"))
