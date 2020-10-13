@@ -1,0 +1,42 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <link rel="stylesheet" href="style/word.css">
+    <script src="src/word.js"></script>
+</head>
+
+<body>
+    <div class="settings">
+        <div class="font">
+            <button
+                onclick="font_size++; if(font_size < 1) {font_size = 1} document.getElementById('font_size_text').textContent = 'font size ['+font_size+'pt]'; style_change = 'font_size'; setStyle()">+</button>
+            <button
+                onclick="font_size--; if(font_size < 1) {font_size = 1} document.getElementById('font_size_text').textContent = 'font size ['+font_size+'pt]'; style_change = 'font_size'; setStyle()">-</button>
+            <a id="font_size_text">font size [12pt] </a>
+            <button onclick="style_change = 'none'; setStyle()">Normal</button>
+            <button style="text-decoration: underline;" onclick="style_change = 'text_dec_uline'; setStyle()">U</button>
+            <button style="font-weight: bold;" onclick="style_change = 'text_dec_bold'; setStyle()">B</button>
+            <button style="font-style: italic;" onclick="style_change = 'text_dec_italic'; setStyle()">I</button>
+        </div>
+
+        <div class="align">
+            <button onclick="style_change = 'align_left'; setStyle()">left</button>
+            <button onclick="style_change = 'align_center'; setStyle()">center</button>
+            <button onclick="style_change = 'align_right'; setStyle()">right</button>
+        </div>
+
+        <div class="color">
+
+        </div>
+
+    </div>
+    <div class="content" ></div>
+
+
+</body>
+
+</html>

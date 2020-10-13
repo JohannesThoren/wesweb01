@@ -1,0 +1,42 @@
+body {
+    margin: 0px
+}
+
+.content {
+    
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20pt;
+
+    width: 60%;
+    margin: auto;
+    padding : 5px;
+
+    box-shadow: 0px 8px 16px 0px black;
+
+    min-height: 500px;
+    word-wrap: break-word;
+}
+
+.content a {
+    margin: 5px;
+}
+
+.settings {
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+
+    padding: 5px;
+}
+
+@media print {
+    .content {
+        width: 100%;
+
+        box-shadow: none;   
+    }
+
+    .settings {
+        visibility: hidden;
+    }
+}
