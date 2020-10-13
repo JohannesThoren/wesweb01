@@ -1,40 +1,35 @@
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-
-    <link rel="stylesheet" href="style/word.css">
+    <link rel="stylesheet" href="style/word/word.css">
     <script src="src/word.js"></script>
 </head>
 
-<body>
+<body style="margin: 0%;">
+
     <div class="settings">
+        <button onclick="toChange = 'reset'; setStyle()">reset</button>
         <div class="font">
-            <button
-                onclick="font_size++; if(font_size < 1) {font_size = 1} document.getElementById('font_size_text').textContent = 'font size ['+font_size+'pt]'; style_change = 'font_size'; setStyle()">+</button>
-            <button
-                onclick="font_size--; if(font_size < 1) {font_size = 1} document.getElementById('font_size_text').textContent = 'font size ['+font_size+'pt]'; style_change = 'font_size'; setStyle()">-</button>
-            <a id="font_size_text">font size [12pt] </a>
-            <button onclick="style_change = 'none'; setStyle()">Normal</button>
-            <button style="text-decoration: underline;" onclick="style_change = 'text_dec_uline'; setStyle()">U</button>
-            <button style="font-weight: bold;" onclick="style_change = 'text_dec_bold'; setStyle()">B</button>
-            <button style="font-style: italic;" onclick="style_change = 'text_dec_italic'; setStyle()">I</button>
+            <button onclick="toChange = 'font_size'; font_size++; setStyle()">+</button>
+            <button onclick="toChange = 'font_size'; font_size--; setStyle()">-</button>
+            <a id="font_size_text">font size [12pt]</a>
+            <select name="fonts" id="font_select" onselect="toChange = 'font-family'">
+                <option value="Times New Roman">Time New Roman</option>
+                <option value="Arial">Arial</option>
+            </select>
         </div>
-
-        <div class="align">
-            <button onclick="style_change = 'align_left'; setStyle()">left</button>
-            <button onclick="style_change = 'align_center'; setStyle()">center</button>
-            <button onclick="style_change = 'align_right'; setStyle()">right</button>
+        <div class="text_style">
+            <button onclick="toChange = 'text_style_uline'; setStyle()" style="text-decoration: underline;">u</button>
+            <button onclick="toChange = 'text_style_bold'; setStyle()" style="font-weight: bold;">b</button>
+            <button onclick="toChange = 'text_style_italic'; setStyle()" style="font-style: italic;">i</button>
         </div>
-
-        <div class="color">
-
+        <div class="alignment">
+            <button onclick="toChange = 'align_left'; setStyle()">left</button>
+            <button onclick="toChange = 'align_center'; setStyle()">center</button>
+            <button onclick="toChange = 'align_right'; setStyle()">right</button>
         </div>
-
     </div>
-    <div class="content" ></div>
+    <div class="content" contenteditable=""></div>
 
 
 </body>

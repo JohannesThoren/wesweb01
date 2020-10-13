@@ -21,44 +21,56 @@
  *   SOFTWARE.
  */
 
-let font_size = 12
+
 let id = 0;
 
-let style_change = "none"
-let style = ""
+let toChange = "none"
+let style = ["","","","",""]
+let styleStr = "";
+
+let font_size = 12
 
 function style_check() {
-    switch (style_change) {
-        case "none":
-            style = ""
-            font_size = 12;
+    switch (toChange) {
+        case "reset":
+            for(i in style) {
+                style[i] = ""
+            }
+            styleStr = ""
             document.getElementById("font_size_text").textContent = "font size [12pt]"
             break
         case "font_size":
-            if (style.search("font-size:" + font_size - 1 + ";"))
-                { style = style.replace("font-size:" + font_size - 1 + ";", "font-size:" + font_size + ";")}
-            else
-                {style = style + "font-size:" + font_size + ";"}
+            style[0] = "font-size:"+font_size+"pt;"
+            document.getElementById("font_size_text").textContent = "font size ["+font_size+"pt]"
             break
-        case "text_dec_uline":
-            style = style + "text-decoration:underline;"
+        case "text_style_uline":
+            style[1] = "text-decoration:underline;"
             break
-        case "text_dec_bold":
-            style = style + "font-weight:bold;"
+        case "text_style_bold":
+            style[2] = "font-weight:bold;"
             break
-        case "text_dec_italic":
-            style = style + "font-style:italic;"
+        case "text_style_italic":
+            style[3] = "font-style:italic;"
             break
         case "align_center":
-            style = style + "width: 100%; display:inline-block; text-align:center;"
+            style[4] = "width: 100%; display:inline-block; text-align:center;"
             break
         case "align_left":
-            style = style + "width: 100%; display:inline-block; text-align:left"
+            style[4] = "width: 100%; display:inline-block; text-align:left"
             break
         case "align_right":
-            style = style + "width: 100%; display:inline-block; text-align:right;"
+            style[4] = "width: 100%; display:inline-block; text-align:right;"
             break
     }
+
+    console.log(style)
+
+    for(i in style) {
+        if(i != "") {
+            styleStr = styleStr + style[i]
+        }
+    }
+
 }
 
 function setStyle() {
@@ -70,10 +82,7 @@ function setStyle() {
         if (sel.getRangeAt && sel.rangeCount) {
             range = window.getSelection().getRangeAt(0);
 
-            var html = '<span style="' + style + '">' + range + '</span>'
-            switch (style_change) {
-
-            }
+            var html = '<span style="' + styleStr + '">' + range + '</span>'
             range.deleteContents();
 
             var el = document.createElement("div");
@@ -87,7 +96,7 @@ function setStyle() {
     } else if (document.selection && document.selection.createRange) {
         range = document.selection.createRange();
         range.collapse(false);
-        range.pasteHTML(html);
+        range.replace(html);
     }
-
+    styleStr = ""
 }
