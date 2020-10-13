@@ -8,10 +8,10 @@
 <body style="margin: 0%;">
 
     <div class="settings">
-        <button onclick="toChange = 'reset'; setStyle()">reset</button>
+        <button accesskey="r" onclick="toChange = 'reset'; setStyle()">reset</button>
         <div class="font">
-            <button onclick="toChange = 'font_size'; font_size++; setStyle()">+</button>
-            <button onclick="toChange = 'font_size'; font_size--; setStyle()">-</button>
+            <button accesskey="+" onclick="toChange = 'font_size'; font_size++; setStyle()">+</button>
+            <button accesskey="-" onclick="toChange = 'font_size'; font_size--; setStyle()">-</button>
             <a id="font_size_text">font size [12pt]</a>
             <select name="fonts" id="font_select" onselect="toChange = 'font-family'">
                 <option value="Times New Roman">Time New Roman</option>
@@ -19,14 +19,14 @@
             </select>
         </div>
         <div class="text_style">
-            <button onclick="toChange = 'text_style_uline'; setStyle()" style="text-decoration: underline;">u</button>
-            <button onclick="toChange = 'text_style_bold'; setStyle()" style="font-weight: bold;">b</button>
-            <button onclick="toChange = 'text_style_italic'; setStyle()" style="font-style: italic;">i</button>
+            <button accesskey="u" onclick="toChange = 'text_style_uline'; setStyle()" style="text-decoration: underline;">u</button>
+            <button accesskey="b" onclick="toChange = 'text_style_bold'; setStyle()" style="font-weight: bold;">b</button>
+            <button accesskey="i" onclick="toChange = 'text_style_italic'; setStyle()" style="font-style: italic;">i</button>
         </div>
         <div class="alignment">
-            <button onclick="toChange = 'align_left'; setStyle()">left</button>
-            <button onclick="toChange = 'align_center'; setStyle()">center</button>
-            <button onclick="toChange = 'align_right'; setStyle()">right</button>
+            <button accesskey="l" onclick="toChange = 'align_left'; setStyle()">left</button>
+            <button accesskey="c" onclick="toChange = 'align_center'; setStyle()">center</button>
+            <button accesskey="r" onclick="toChange = 'align_right'; setStyle()">right</button>
         </div>
     </div>
     <div class="content" contenteditable=""></div>

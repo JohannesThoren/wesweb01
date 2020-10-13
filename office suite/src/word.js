@@ -33,10 +33,11 @@ let font_size = 12
 function style_check() {
     switch (toChange) {
         case "reset":
-            for(i in style) {
-                style[i] = ""
-            }
-            styleStr = ""
+            style[0] = "font-size:12pt;"
+            style[1] = "text-decoration:none;"
+            style[2] = "font-weight:normal;"
+            style[3] = "font-style:none;"
+            style[4] = "width: 100%; display:inline-block; text-align:left"
             document.getElementById("font_size_text").textContent = "font size [12pt]"
             break
         case "font_size":
