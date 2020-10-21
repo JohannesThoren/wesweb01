@@ -1,9 +1,0 @@
-@media all and (max-width: 500px) {
-    .header {
-        font-size: 15px;
-    }
-
-    .content .row .item .item_text {
-        font-size: 6pt;
-    }
-}
