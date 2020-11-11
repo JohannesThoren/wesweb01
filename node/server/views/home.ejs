@@ -8,12 +8,19 @@
 
 <body>
     <h1>Hem</h1>
-    <% for(var i in personer) {%>
-    <div>
-        <h3><%=i%></h3>
-        <p>say <%= personer[i]%></p>
+    <% if(!animalName || !animals[animalName]) {%>
+    <% for(let i in animals) {%>
+    <div class="djur">
+        <h3><%= i%></h3>
+        <p>say: <%= animals[i]%> </p>
     </div>
-    <%}; %>
+    <%}%>
+    <%} else {%>
+    <div class="animal">
+        <h4><%= animalName%></h4>
+        <p>say:<%= animals[animalName] %> %></p>
+    </div>
+    <%}%> 
 </body>
 
 </html>

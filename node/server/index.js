@@ -29,38 +29,33 @@ app.set("view engine", "ejs");
 app.use(bp.urlencoded({extended: true}));
 app.use(exp.static("resources"));
 
-let personer = {
-    bob : "Den mäktiga bob",
-    bobett : "bobs fru",
-    boben : "bobs barn"
-}
-
-app.get("/", (req, res) =>  {
-    res.render("home", {personer:personer});
-});
+let Animals = {
+    cat : "maoww",
+    dog : "woff woff",
+    owl : "hoo hoo"
+};
 
 app.get("/t1", (req, res) =>  {
-    res.render("about");
+    res.render("new");
 });
 
-app.get("/t2", (req, res) =>  {
-    res.render("posts");
+app.get("/:animalNames", (req, res) =>  {
+    res.render("home", {animals: Animals, animalName: req.params.animalName});
 });
 
-app.get("/t3", (req, res) =>  {
-    res.render("home");
+app.get("/", (req, res) => {
+    res.render("home", {animals: Animals, animalName: null});
 });
 
-app.get("/t4", (req, res) =>  {
-    res.render("home");
-});
+app.post("/", (req, res) => {
+    console.log(req.body.animalName);
 
-app.get("/t5", (req, res) =>  {
-    res.render("home");
-});
+    var animal = req.body.animalName;
+    var sound = req.body.animalSound;
 
-app.get("/t6", (req, res) =>  {
-    res.render("home");
+    Animals[animal] = sound;
+
+    res.redirect("/");
 });
 
 app.listen(8000, (err) => {
