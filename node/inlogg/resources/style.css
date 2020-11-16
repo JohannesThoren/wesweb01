@@ -1,0 +1,71 @@
+body {
+  background-color: black;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+#loginbox {
+  margin-top: 10%;
+  color: white;
+  border: solid 1px white;
+  text-align: center;
+  padding: 4px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100px;
+  height: 80px;
+
+  transition: 1s;
+}
+
+#loginbox:hover {
+  width: 250px;
+  height: 500px;
+}
+
+#loginbox:hover #submit {
+  visibility: visible;
+}
+
+#loginbox:hover .input {
+  visibility: visible;
+}
+
+#loginbox form {
+  margin-top: 20%;
+}
+
+#submit {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  visibility: hidden;
+  font-size: 1.5em;
+  padding: 4px;
+  margin: 20px;
+  color: white;
+  background: transparent;
+  border: solid 1px white;
+
+  transition-delay: 0.2s;
+}
+
+#submit:hover {
+  color: grey;
+  border: solid 1px grey;
+}
+
+.input {
+  width: 70%;
+  visibility: hidden;
+  margin-top: 20px;
+  background: transparent;
+  border: none;
+
+  border-bottom: solid 1px white;
+
+  cursor: text;
+
+  color: white;
+
+  font-size: 1.2em;
+
+  transition-delay: 0.2s;
+}
