@@ -44,11 +44,17 @@ app.get("/", (req, res) => {
   res.render("home", { user: currentUser });
 });
 
-app.get("/login", (req, res) => {
-  res.render("login");
+app.get("/signIn", (req, res) => {
+  res.render("sign-in");
 });
 
-app.post("/login", (req, res) => {
+app.get("/signOut", (req, res) => {
+  console.log(currentUser.username+" signed out")
+  currentUser = null;
+  res.redirect("/");
+});
+
+app.post("/signIn", (req, res) => {
   var username = req.body.uname;
   var password = req.body.pass;
 
@@ -57,7 +63,7 @@ app.post("/login", (req, res) => {
       username === users[index].username &&
       password === users[index].password
     ) {
-      console.log(username + " logged in");
+      console.log(username + " signed in");
       currentUser = new User(username, password);
       res.redirect("/");
     }
