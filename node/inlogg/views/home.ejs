@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/home.css">
 </head>
 
 <body>
     <% if(user != null) {%>
-    <h1><%= user.username %></h1>
+        <a class="inout" href="/signOut">Log out</a>
+    <h1 class="title">signed in as <%= user.username %></h1>
     <% } else {%>
-        <a href="/login">Login</a>
-    <h1>Not signed in</h1>
+        <a class="inout" href="/signIn">Login</a>
+    <h1 class="title" >Not signed in</h1>
     <% } %>
 </body6>
 

@@ -3,7 +3,7 @@ body {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
-#loginbox {
+#sign-in-box {
   margin-top: 10%;
   color: white;
   border: solid 1px white;
@@ -17,20 +17,20 @@ body {
   transition: 1s;
 }
 
-#loginbox:hover {
+#sign-in-box:hover {
   width: 250px;
   height: 500px;
 }
 
-#loginbox:hover #submit {
+#sign-in-box:hover #submit {
   visibility: visible;
 }
 
-#loginbox:hover .input {
+#sign-in-box:hover .input {
   visibility: visible;
 }
 
-#loginbox form {
+#sign-in-box form {
   margin-top: 20%;
 }
 
