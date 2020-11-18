@@ -57,7 +57,6 @@ app.post("/signUp", (req, res) => {
     let newUser = new User(req.body.uname, md5(req.body.pass1))
     users.push(newUser);
     res.redirect("/signIn")
-    console.log(users)
   }
   else {
     res.redirect("/SignUp")
