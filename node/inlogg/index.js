@@ -24,6 +24,7 @@
 const exp = require("express");
 const app = exp();
 const bp = require("body-parser");
+const md5 = require("md5")
 
 app.set("view engine", "ejs");
 app.use(bp.urlencoded({ extended: true }));
@@ -36,16 +37,12 @@ class User {
   }
 }
 
-var users = [new User("user1", "password1"), new User("user2", "password2")];
+var users = [];
 
 var currentUser = null;
 
 app.get("/", (req, res) => {
   res.render("home", { user: currentUser });
-});
-
-app.get("/signIn", (req, res) => {
-  res.render("sign-in");
 });
 
 app.get("/signOut", (req, res) => {
@@ -54,17 +51,31 @@ app.get("/signOut", (req, res) => {
   res.redirect("/");
 });
 
-app.post("/signIn", (req, res) => {
-  var username = req.body.uname;
-  var password = req.body.pass;
+app.get("/signUp", (req, res) => {
+  res.render("sign-up");
+})
 
+app.post("/signUp", (req, res) => {
+  if (md5(req.body.pass1) == md5(req.body.pass2)) {
+    let newUser = new User(req.body.uname, md5(req.body.pass1))
+    users.push(newUser);
+    res.redirect("/signIn")
+    console.log(users)
+  }
+})
+
+app.get("/signIn", (req, res) => {
+  res.render("sign-in");
+});
+
+app.post("/signIn", (req, res) => {
   for (let index in users) {
     if (
-      username === users[index].username &&
-      password === users[index].password
+      req.body.uname === users[index].username &&
+      md5(req.body.pass) === users[index].password
     ) {
-      console.log(username + " signed in");
-      currentUser = new User(username, password);
+      console.log(req.body.uname + " signed in");
+      currentUser = new User(req.body.uname, md5(req.body.pass));
       res.redirect("/");
     }
   }

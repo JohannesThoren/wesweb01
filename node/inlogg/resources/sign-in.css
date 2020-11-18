@@ -17,6 +17,16 @@ body {
   transition: 1s;
 }
 
+#sign-in-box a {
+  color: white;
+  visibility: hidden;
+  transition-delay: 0.25s;
+}
+
+#sign-in-box:hover a {
+  visibility: visible;
+}
+
 #sign-in-box:hover {
   width: 250px;
   height: 500px;
