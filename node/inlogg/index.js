@@ -40,7 +40,7 @@ class User {
 var users = [];
 
 app.get("/", (req, res) => {
-  console.log(users)
+  console.log(users[req.query.user])
   if (users[req.query.user]) {
     res.render("home", { user: req.query.user });
     
