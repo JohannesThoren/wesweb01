@@ -49,7 +49,7 @@ app.get("/signIn", (req, res) => {
 });
 
 app.get("/signOut", (req, res) => {
-  console.log(currentUser.username+" signed out")
+  console.log(currentUser.username + " signed out");
   currentUser = null;
   res.redirect("/");
 });
