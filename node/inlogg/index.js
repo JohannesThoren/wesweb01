@@ -41,7 +41,13 @@ var users = [];
 
 app.get("/", (req, res) => {
   console.log(req.query.user)
-  res.render("home", { user: req.query.user });
+
+  if (users[req.query.user]) {
+    res.render("home", { user: req.query.user });
+  }
+  else {
+    res.render("home", {user: null})
+  }
 });
 
 app.get("/signOut", (req, res) => {
