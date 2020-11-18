@@ -39,15 +39,12 @@ class User {
 
 var users = [];
 
-var currentUser = null;
-
 app.get("/", (req, res) => {
-  res.render("home", { user: currentUser });
+  console.log(req.query.user)
+  res.render("home", { user: req.query.user });
 });
 
 app.get("/signOut", (req, res) => {
-  console.log(currentUser.username + " signed out");
-  currentUser = null;
   res.redirect("/");
 });
 
@@ -56,11 +53,14 @@ app.get("/signUp", (req, res) => {
 })
 
 app.post("/signUp", (req, res) => {
-  if (md5(req.body.pass1) == md5(req.body.pass2)) {
+  if (md5(req.body.pass1) == md5(req.body.pass2) && req.body.uname != "" && req.body.pass1 != "" && req.body.pass2 != "") {
     let newUser = new User(req.body.uname, md5(req.body.pass1))
     users.push(newUser);
     res.redirect("/signIn")
     console.log(users)
+  }
+  else {
+    res.redirect("/SignUp")
   }
 })
 
@@ -71,14 +71,15 @@ app.get("/signIn", (req, res) => {
 app.post("/signIn", (req, res) => {
   for (let index in users) {
     if (
-      req.body.uname === users[index].username &&
-      md5(req.body.pass) === users[index].password
+      req.body.uname == users[index].username &&
+      md5(req.body.pass) == users[index].password
     ) {
       console.log(req.body.uname + " signed in");
       currentUser = new User(req.body.uname, md5(req.body.pass));
-      res.redirect("/");
+      res.redirect(`/?user=${users[index].username}&pass=${users[index].password}`);
     }
   }
+  res.redirect("/signIn")
 });
 
 app.listen(8000, (err) => {

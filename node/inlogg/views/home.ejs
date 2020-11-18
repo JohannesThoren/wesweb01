@@ -11,7 +11,7 @@
     <div id="header">
         <% if(user != null) {%>
         <a class="inout" href="/signOut">Log out</a>
-        <h1 class="title">signed in as <%= user.username %></h1>
+        <h1 class="title">signed in as <%= user %></h1>
         <% } else {%>
         <a class="inout" href="/signIn">Login</a>
         <h1 class="title">Not signed in</h1>
