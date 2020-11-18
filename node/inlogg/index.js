@@ -45,10 +45,10 @@ app.get("/", (req, res) => {
     console.log(users[i])
     if (users[i].username == req.query.User) {
       res.render("home", { user: req.query.user });
-
+    }
   }
 
-  res.render("home", {user:null})
+  res.render("home", {user:null});
 });
 
 app.get("/signOut", (req, res) => {
