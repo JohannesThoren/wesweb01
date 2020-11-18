@@ -40,15 +40,12 @@ class User {
 var users = [];
 
 app.get("/", (req, res) => {
- 
-  for (var i in users.length) {
-    console.log(users[i])
-    if (users[i].username == req.query.User) {
-      res.render("home", { user: req.query.user });
-    }
-  }
 
-  res.render("home", {user:null});
+  console.log(users.length)
+  for(let i in users.length) {
+    console.log(users[i])
+  }
+  res.render("home", { user: null });
 });
 
 app.get("/signOut", (req, res) => {
@@ -81,7 +78,6 @@ app.post("/signIn", (req, res) => {
       md5(req.body.pass) == users[index].password
     ) {
       console.log(req.body.uname + " signed in");
-      currentUser = new User(req.body.uname, md5(req.body.pass));
       res.redirect(`/?user=${users[index].username}&pass=${users[index].password}`);
     }
   }
