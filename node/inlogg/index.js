@@ -40,13 +40,16 @@ class User {
 var users = [];
 
 app.get("/", (req, res) => {
-  console.log(users[req.query.user])
-  if (users[req.query.user]) {
-    res.render("home", { user: req.query.user });
-    
-  }
-  else {
-    res.render("home", { user: null })
+ 
+  for (var i in users.length()) {
+    console.log(users[i])
+    if (users[i].username == req.query.User) {
+      res.render("home", { user: req.query.user });
+
+    }
+    else {
+      res.render("home", { user: null })
+    }
   }
 });
 
