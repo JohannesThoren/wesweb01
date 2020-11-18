@@ -41,7 +41,7 @@ var users = [];
 
 app.get("/", (req, res) => {
  
-  for (var i in users.length()) {
+  for (var i in users.length) {
     console.log(users[i])
     if (users[i].username == req.query.User) {
       res.render("home", { user: req.query.user });
