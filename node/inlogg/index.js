@@ -24,12 +24,13 @@
 const exp = require("express");
 const app = exp();
 const bp = require("body-parser");
-const md5 = require("md5")
+const md5 = require("md5");
 
 app.set("view engine", "ejs");
 app.use(bp.urlencoded({ extended: true }));
 app.use(exp.static("resources"));
 
+// the user class that contains a name and password
 class User {
   constructor(username, password) {
     this.username = username;
@@ -37,13 +38,16 @@ class User {
   }
 }
 
-var users = [];
+// an array with all the users
+// used to check if a user exists
+const users = [];
 
 app.get("/", (req, res) => {
-
-  console.log(users.length)
-  for(let i in users.length) {
-    console.log(users[i])
+  for (let i in users) {
+    if (req.query.user == users[i].username) {
+      res.render("home", { user: req.query.user });
+      return;
+    }
   }
   res.render("home", { user: null });
 });
@@ -54,18 +58,32 @@ app.get("/signOut", (req, res) => {
 
 app.get("/signUp", (req, res) => {
   res.render("sign-up");
-})
+});
 
 app.post("/signUp", (req, res) => {
-  if (md5(req.body.pass1) == md5(req.body.pass2) && req.body.uname != "" && req.body.pass1 != "" && req.body.pass2 != "") {
-    let newUser = new User(req.body.uname, md5(req.body.pass1))
+  //  checks if something there is something in the text input
+  //  checks if pass1 and pass2 is matching
+  if (
+    md5(req.body.pass1) == md5(req.body.pass2) &&
+    req.body.uname &&
+    req.body.pass1 &&
+    req.body.pass2
+  ) {
+    //checks if user exsists, if so redirect back to sign up
+    for (user in users) {
+      if (req.body.uname == users[user].username) {
+        res.redirect("/SignUp");
+      }
+    }
+
+    //create a new user and redirect to the sing in page
+    let newUser = new User(req.body.uname, md5(req.body.pass1));
     users.push(newUser);
-    res.redirect("/signIn")
+    res.redirect("/signIn");
+  } else {
+    res.redirect("/SignUp");
   }
-  else {
-    res.redirect("/SignUp")
-  }
-})
+});
 
 app.get("/signIn", (req, res) => {
   res.render("sign-in");
@@ -73,17 +91,22 @@ app.get("/signIn", (req, res) => {
 
 app.post("/signIn", (req, res) => {
   for (let index in users) {
+    // checks if username and password matches any username and password
+    // in the users array.
     if (
       req.body.uname == users[index].username &&
       md5(req.body.pass) == users[index].password
     ) {
-      console.log(req.body.uname + " signed in");
-      res.redirect(`/?user=${users[index].username}&pass=${users[index].password}`);
+      res.redirect(
+        `/?user=${users[index].username}&pass=${users[index].password}`
+      );
+      return;
     }
   }
-  res.redirect("/signIn")
+  res.redirect("/signIn");
 });
 
+// the server listener
 app.listen(8000, (err) => {
   if (err) console.log(err);
 });
