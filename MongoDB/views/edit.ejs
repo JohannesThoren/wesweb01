@@ -1,0 +1,45 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        form {
+            border: solid 1px black;
+            background-color: lightblue;
+            padding: 5px;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        input {
+            border: solid 1px black;
+            padding: 5px;
+            margin: 5px
+        }
+    </style>
+
+</head>
+
+<body style="text-align: center;">
+    <h1>Edit</h1>
+
+    <% console.log(data) %>
+
+        <form action="/index/<%= data._id%>?_method=PUT" method="POST">
+            <input type="text" name="usr" placeholder="användar namn" value="<%= data.usr %> ">
+            <input type="text" name="pass" placeholder="Lösenord" value="<%= data.pass %> ">
+            <input type="text" name="fNamn" placeholder="Namn" value="<%= data.fNamn %> ">
+            <input type="text" name="eNamn" placeholder="Efternamn" value="<%= data.eNamn %> ">
+            <input type="number" name="age" placeholder="Ålder" value=<%=data.age %>>
+            <label for="inS">Går Du I Skolan?</label>
+            <input type="checkbox" name="inS" id="" value="true" value="<%= data.inS %>" >
+            <input type="submit" value="commit">
+        </form>
+</body>
+
+</html>

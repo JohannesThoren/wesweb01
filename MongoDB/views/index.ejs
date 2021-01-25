@@ -1,0 +1,33 @@
+</html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+
+</head>
+
+<body style="text-align: center;">
+    <div id="full">
+        <header>
+            <h1>Välkommen</h1>
+        </header>
+        <a href="/index/new"><button>skapa ny</button></a>
+        <main>
+            <% data.forEach(user=> { %>
+                <a href="/index/<%= user._id %>">
+                    <div id="kort" style="border: 1px black solid; width: 250px; margin-left: auto; margin-right: auto; margin-top: 10px;">
+                        <h3>
+                            <%= user.usr %>
+                        </h3>
+                    </div>
+                </a>
+                <% }); %>
+
+        </main>
+    </div>
+</body>
+
+</html>

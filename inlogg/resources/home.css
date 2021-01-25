@@ -1,0 +1,21 @@
+body {
+    color: white;
+    background-color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin: 0;
+}
+
+#header {
+    border-bottom: solid 1px white;
+    padding: 5px;
+}
+
+.inout {
+    margin-top: 15px;
+    padding: 10px;
+    /* background-color: rgba(100, 100, 100, 0.8); */
+    border: 1px solid white;
+    color: white;
+    text-decoration: none;
+    float: right;
+}

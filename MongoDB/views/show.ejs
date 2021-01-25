@@ -1,0 +1,83 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        table {
+            padding: 2px;
+            border: 1px black solid;
+            background-color: lightblue;
+            width: -moz-fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        th {
+            padding: 5px;
+            border: 1px black solid;
+            text-align: center;
+        }
+        td {
+            padding: 5px;
+            border: 1px black solid;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body style="text-align: center;">
+    <a  href="<%= data._id %>/edit"><button style="margin: 10px;" >Edit</button></a>
+    <a href="<%= data._id %>/delete"><button style="margin: 10px;" >Remove</button></a>
+    <table>
+        <tr>
+            <th>username</th>
+            <td>
+                <%= data.usr %>
+            </td>
+        </tr>
+        <tr>
+            <th>fNamn</th>
+            <td>
+                <%= data.fNamn %>
+            </td>
+        </tr>
+        <tr>
+            <th>eNamn</th>
+            <td>
+                <%= data.eNamn %>
+            </td>
+        </tr>
+        <tr>
+            <th>password</th>
+            <td>
+                <%= data.pass %>
+            </td>
+        </tr>
+        <tr>
+            <th>age</th>
+            <td>
+                <%= data.age %>
+            </td>
+        </tr>
+        <tr>
+            <th>in school</th>
+            <td>
+                <%= data.inS %>
+            </td>
+        </tr>
+        <tr>
+            <th>id</th>
+            <td>
+                <%= data._id %>
+            </td>
+        </tr>
+    </table>
+
+
+</body>
+
+</html>

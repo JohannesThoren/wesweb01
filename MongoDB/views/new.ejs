@@ -1,0 +1,43 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        form {
+            border: solid 1px black;
+            background-color: lightblue;
+            padding: 5px;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        input {
+            border: solid 1px black;
+            padding: 5px;
+            margin: 5px
+        }
+    </style>
+
+</head>
+
+<body style="text-align: center;">
+    <h1>New</h1>
+
+    <form action="/index" method="POST">
+        <input type="text" name="usr" placeholder="användar namn">
+        <input type="text" name="pass" placeholder="Lösenord">
+        <input type="text" name="fNamn" placeholder="Namn">
+        <input type="text" name="eNamn" placeholder="Efternamn">
+        <input type="number" name="age" placeholder="Ålder">
+        <label for="inS">Går Du I Skolan?</label>
+        <input type="checkbox" name="inS" value="true" id="">
+        <input type="submit" value="commit">
+    </form>
+</body>
+
+</html>
