@@ -27,11 +27,17 @@ const app = exp();
 const moon = require('mongoose');
 const mo = require('method-override');
 const md5 = require('md5')
+const cookieParser = require('cookie-parser');
+const Cookies = require('cookies');
+const { nextTick } = require('process');
+
 
 app.set('view engine', 'ejs');
 app.use(exp.urlencoded({ extended: true }));
 app.use(exp.static('resources'));
 app.use(mo('_method'));
+app.use(cookieParser());
+
 
 // connection to database
 // one for users, one for the posts
@@ -57,6 +63,7 @@ const userSchema = new moon.Schema({
     age: Number,
 })
 
+
 const postSchema = new moon.Schema({
     sender_id: String,
     post: String,
@@ -65,6 +72,16 @@ const postSchema = new moon.Schema({
 
 let User = moon.model("User", userSchema);
 let Post = moon.model("Post", postSchema);
+
+User.create({
+    username: 'test',
+    password: '123',
+    firstName: 'Test',
+    sureName: 'Testsson',
+    email: 'Test@Test.Test',
+    age: 1,
+})
+
 
 // just home............
 app.get('/', (req, res) => {
@@ -77,16 +94,45 @@ app.get('/index', (req, res) => {
 
 // new user
 app.get('/index/new', (req, res) => {
-    
+
 })
 
+function validateCookie(req, res, next) {
+    const { cookies } = req
+    if ('sessionId' in cookies) {
+
+        next()
+    }
+    else {
+        res.send("LOL!")
+    }
+
+
+}
+
 // sign in
-app.get('/index/signIn', (req, res) => {
+app.get('/index/signIn', validateCookie, (req, res) => {
     res.render('signin')
 })
 
 app.post('/index/signIn', (req, res) => {
-    
+    let password = md5(req.body.password)
+    let username = req.body.username
+
+    let currentUser = User.find({ 'username': username })
+
+    if (password == currentPassword.password) {
+        console.log(currentUser.password)
+
+        let sessionId = res.cookie('sessionId', md5(Date.now))
+    }
+
+    else {
+        console.log("fuck you!")
+    }
+
+    console.log(req.body)
+    res.redirect('home')
 })
 
 // home... just signed in lol
@@ -101,7 +147,7 @@ app.get('/index/:id/profile', (req, res) => {
 
 // edit user
 app.get('/index/:id/edit', (req, res) => {
-    
+
 })
 
 app.put('/index/:id/edit', (req, res) => {
@@ -110,16 +156,16 @@ app.put('/index/:id/edit', (req, res) => {
 
 // delete user
 app.get('/index/:id/delete', (req, res) => {
-    
+
 })
 
 app.delete('/index/:id', (req, res) => {
-    
+
 })
 
 // edit post
 app.get('/index/:id/post/:post_id/edit', (req, res) => {
-    
+
 })
 
 app.put('/index/:id/post/:post_id/edit', (req, res) => {
@@ -128,14 +174,15 @@ app.put('/index/:id/post/:post_id/edit', (req, res) => {
 
 // delete  post
 app.get('/index/:id/post/:post_id/delete', (req, res) => {
-    
+
 })
 
 app.delete('/index/:id/post/:post_id', (req, res) => {
-    
+
 })
 
-app.listen(8000, function (err) {
+// starting the server
+app.listen(8000, (err) => {
     if (err) {
         console.log(err);
         console.log("någonting blev fel");
