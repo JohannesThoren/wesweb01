@@ -4,25 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../signin.css">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 </head>
 
 <body>
-    <div id="signin_box">
-        <img src="https://wallpaperaccess.com/full/154009.jpg?crop" alt="" srcset="">
-        <div id="input">
-            <h1>Sign in</h1>
-            <form action="/index/signIn" method="POST">
-                <input type="text" name="username" placeholder="Username"> <br>
-                <input type="password" name="password" placeholder="Password"> <br>
-                <input id="btn" type="submit" value="Sign In">
-            </form>
-        </div>
-    </div>
+
+    <form action="/index/signIn" method="POST">
+        <input type="text" name="username" placeholder="Username"> <br>
+        <input type="password" name="password" placeholder="Password"> <br>
+        <input id="btn" type="submit" value="Sign In">
+    </form>
+
 </body>
 
 </html>

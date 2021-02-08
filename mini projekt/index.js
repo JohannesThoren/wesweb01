@@ -25,11 +25,14 @@
 const exp = require('express');
 const app = exp();
 const moon = require('mongoose');
+const util = require('util');
 const mo = require('method-override');
 const md5 = require('md5')
 const cookieParser = require('cookie-parser');
 const Cookies = require('cookies');
 const { nextTick } = require('process');
+const { randomInt } = require('crypto');
+const { json } = require('body-parser');
 
 
 app.set('view engine', 'ejs');
@@ -61,6 +64,8 @@ const userSchema = new moon.Schema({
     sureName: String,
     email: String,
     age: Number,
+    sessionId: String,
+    sessionExpireDate: Number,
 })
 
 
@@ -74,12 +79,14 @@ let User = moon.model("User", userSchema);
 let Post = moon.model("Post", postSchema);
 
 User.create({
-    username: 'test',
-    password: '123',
+    username: 'test4',
+    password: md5('123'),
     firstName: 'Test',
     sureName: 'Testsson',
     email: 'Test@Test.Test',
     age: 1,
+    sessionId: '123',
+    sessionExpireDate: null
 })
 
 
@@ -99,40 +106,70 @@ app.get('/index/new', (req, res) => {
 
 function validateCookie(req, res, next) {
     const { cookies } = req
-    if ('sessionId' in cookies) {
+    // check if cookie is expierd and if the session id is ok
 
-        next()
+    let sessionIdCookie = 'sessionId' in cookies
+
+    console.log(sessionIdCookie)
+
+    if ('sessionId' in cookies) {
+        if (User.find({ 'sessionId': 'sessionId' in cookies })) {
+            res.status(200).redirect('home')
+        }
     }
     else {
-        res.send("LOL!")
+        res.status(403).render('signin')
     }
-
-
+    next()
 }
 
 // sign in
 app.get('/index/signIn', validateCookie, (req, res) => {
-    res.render('signin')
+
 })
 
 app.post('/index/signIn', (req, res) => {
-    let password = md5(req.body.password)
-    let username = req.body.username
+    let password = md5(req.body.password);
+    let username = req.body.username;
 
-    let currentUser = User.find({ 'username': username })
 
-    if (password == currentPassword.password) {
-        console.log(currentUser.password)
+    // find User with username then do stuff
+    User.findOne({ username: username }, (err, currentUser) => {
 
-        let sessionId = res.cookie('sessionId', md5(Date.now))
-    }
+        if (err) {
+            console.log("x");
+        }
 
-    else {
-        console.log("fuck you!")
-    }
+        // check password and username if it is correct
+        try {
+            if (password == currentUser.password && username == currentUser.username) {
 
-    console.log(req.body)
-    res.redirect('home')
+                // set experation date for the new cookie
+                // TODO Check if this works
+                let date = new Date
+                let expDate = new Date(date.getMilliseconds() + 604800000)
+
+                console.log(expDate)
+
+                // create a new auth cookie
+                res.cookie('sessionId', md5(Math.floor(Math.random(Date.now()))), { maxAge: expDate })
+
+                // update the experation date of the cookie in the database
+                User.findByIdAndUpdate(currentUser._id, { sessionExpireDate: expDate })
+
+            }
+            else {
+                console.log("ERROR!");
+            }
+        }
+        catch (err) {
+            console.log(err)
+        }
+        console.log(req.body)
+        res.redirect('home')
+    });
+
+
 })
 
 // home... just signed in lol
