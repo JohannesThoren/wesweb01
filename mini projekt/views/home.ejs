@@ -11,27 +11,33 @@
 
 <body>
     <div id="header">
-        <span id="user"><%= user %>  </span>
+        <a href="/index/<%=user._id%>"><%= user.username %></a>
+        <div id="control_bar">
+            <a href="/index/signOut"><button>Sign Out</button></a>
+        </div>
     </div>
     <div id="content">
-
-        <% for (post in posts) {%>
+        <h1>Posts</h1>
+        <a href="/index/<%= user._id %>/posts/new"><button>new</button></a>
+        <% for (let index = posts.length - 1; index >= 0; index--) {%>
             <div class="post">
                 <div class="post_header">
                     <span class="post_title">
-                        <%= posts[post].title %>
+                        <%= posts[index].title %>
                     </span>
-                    <span class="post_author">
-                        <%= posts[post].user %>
-                    </span>
+                    <a class="post_author" href="/index/<%= posts[index].authorId %>">
+                        <%= posts[index].author %>
+                    </a>
                 </div>
                 <div class="post_content">
                     <p>
-                        <%= posts[post].post %>
+                        <%= posts[index].post %>
                     </p>
                 </div>
                 <div class="post_footer">
-                    <span><%= posts[post].tag %> </span>
+                    <span>
+                        <%= posts[index].tag %>
+                    </span>
                 </div>
             </div>
             <% } %>

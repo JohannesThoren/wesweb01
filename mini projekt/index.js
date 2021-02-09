@@ -70,7 +70,8 @@ const userSchema = new moon.Schema({
 
 
 const postSchema = new moon.Schema({
-    user: String,
+    author: String,
+    authorId: String,
     title: String,
     post: String,
     date: Date,
@@ -80,13 +81,14 @@ const postSchema = new moon.Schema({
 let User = moon.model("User", userSchema);
 let Post = moon.model("Post", postSchema);
 
-// Post.create({
-//     user: 'test4',
-//     title: 'hej',
-//     post: 'hejsan!',
-//     date: Date.now(),
-//     tag: "hello"
-// })
+Post.create({
+    author: 'krabban',
+    authorId: '602245466e805a11370dfc7a',
+    post: 'hejsan!',
+    date: Date.now(),
+    tag: "hello",
+    title: "hejsan"
+})
 
 // User.create({
 //     username: 'test4',
@@ -100,16 +102,16 @@ let Post = moon.model("Post", postSchema);
 
 function validateCookie(req, res, next) {
     const { cookies } = req
-    // check if cookie is expierd and if the session id is ok
 
-    let sessionIdCookie = 'sessionId' in cookies
-
-    // checks if client has a cookie amd throws status 200
-    // if not throws status 403
     if ('sessionId' in cookies && 'userId' in cookies) {
-        if (User.find({ 'sessionId': 'sessionId' in cookies })) {
-            next()
-        }
+        User.findById(cookies.userId, (err, user) => {
+            if (cookies.sessionId == user.sessionId) {
+                next()
+            }
+            else {
+                res.status(403).redirect("/index/signIn")
+            }
+        })
     }
     else {
         res.status(403).redirect("/index/signIn")
@@ -123,20 +125,21 @@ app.get('/', validateCookie, (req, res) => {
 })
 
 app.get('/index', validateCookie, (req, res) => {
+    const { cookies } = req
+
     Post.find({}, (err, posts) => {
-        User.findById(res.cookie.userId, (err, user) => {
-            
-            res.render('home', {posts:posts, user:user})
+        User.findById(cookies.userId, (err, user) => {
+            res.render('home', { posts: posts, user: user })
         })
     })
-}) 
+})
 
 app.get('/index/signUp', (req, res) => {
     res.render('signup')
 })
 
 app.post('/index/signUp', (req, res) => {
-    
+
     let username = req.body.username
     let password = req.body.password
     let re_password = req.body.re_password
@@ -173,44 +176,52 @@ app.post('/index/signIn', (req, res) => {
 
 
     // find User with username then do stuff
-    User.findOne({ username: username }, (err, currentUser) => {
+    User.findOne({ username: username }, async (err, currentUser) => {
 
         if (err) {
             res.send(err)
         }
 
         // check password and username if it is correct
-        try {
-            if (password == currentUser.password && username == currentUser.username) {
+        if (password == currentUser.password && username == currentUser.username) {
 
-                // set experation date for the new cookie
-                // TODO Check if this works
-                let date = new Date
-                let expDate = new Date(date.getMilliseconds() + 604800000)
-                // create a new auth cookie
-                res.cookie('sessionId', md5(Math.floor(Math.random(Date.now()))), { maxAge: expDate })
-                console.log(currentUser._id)
-                res.cookie('userId', currentUser._id, { maxAge: expDate })
-            }
-            else {
-                console.log("ERROR! wrong password or username");
-            }
+            // set experation date for the new cookie
+            // TODO Check if this works
+            let date = new Date
+            let expDate = new Date(date.getMilliseconds() + 604800000)
+            let sessionId = md5(Math.floor(Math.random(Date.now())))
+            // create a new auth cookie
+
+
+            res.cookie('sessionId', sessionId, { maxAge: expDate })
+            res.cookie('userId', currentUser._id, { maxAge: expDate })
+
+            // update the session id
+
+            await User.findByIdAndUpdate(currentUser._id, { sessionId: sessionId })
         }
-        catch (err) {
-            console.log(err)
+        else {
+            console.log("ERROR! wrong password or username");
         }
+
+
         res.redirect('/index')
     });
 
 
 })
 
-// the user profile
-// app.get('/index/:id', (req, res) => {
-//     res.render('profile', { data: data })
-// })
+app.get('/index/signOut', (req, res) => {
+    const { cookies } = req
+    User.findById(cookies.userId, async (err, user) => {
+        await User.findByIdAndUpdate(user._id, { sessionId: null })
+    })
 
-// edit user
+    res.redirect('/')
+})
+
+
+
 app.get('/index/:id/edit', validateCookie, (req, res) => {
 
 })
@@ -229,17 +240,38 @@ app.delete('/index/:id', (req, res) => {
     User.findById(req.params.id, (err, data) => {
         console.log(id)
 
-        res.render('profile', {profile: data})
+        res.render('profile', { profile: data })
     })
 
 
 })
 // new post
 app.get('/index/:id/posts/new', validateCookie, (req, res) => {
-
+    res.render('post_new')
 })
 
 app.post('/index/:id/posts/new', validateCookie, (req, res) => {
+    const { cookies } = req
+
+    let text = req.body.text
+    let title = req.body.title
+    let tag = req.body.tag
+    let userId = cookies.userId
+
+
+    User.findById(userId, (err, user) => {
+        Post.create({
+            author: user.username,
+            authorId: user._id,
+            post: text,
+            date: Date.now(),
+            tag: tag,
+            title: title
+        })
+    })
+
+    res.redirect('/')
+
 
 })
 
