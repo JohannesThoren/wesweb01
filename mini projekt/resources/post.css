@@ -1,4 +1,5 @@
 .post {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 20px;
     color: white;
     background-color: #002244;
@@ -23,14 +24,21 @@
 }
 
 .post_content {
-    background-color: #14283a;
+    background-color: #555555;
     padding: 10px;
     text-align: left;
+    font-size: 1.5em;
 }
 
 .post_footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     font-size: 0.8em;
     color: grey;
     padding: 10px;
     text-align: left;
+}
+
+.post_date {
+    text-align: center;
 }

@@ -81,14 +81,14 @@ const postSchema = new moon.Schema({
 let User = moon.model("User", userSchema);
 let Post = moon.model("Post", postSchema);
 
-Post.create({
-    author: 'krabban',
-    authorId: '602245466e805a11370dfc7a',
-    post: 'hejsan!',
-    date: Date.now(),
-    tag: "hello",
-    title: "hejsan"
-})
+// Post.create({
+//     author: 'krabban',
+//     authorId: '602245466e805a11370dfc7a',
+//     post: 'hejsan!',
+//     date: Date.now(),
+//     tag: "hello",
+//     title: "hejsan"
+// })
 
 // User.create({
 //     username: 'test4',
@@ -189,7 +189,7 @@ app.post('/index/signIn', (req, res) => {
             // TODO Check if this works
             let date = new Date
             let expDate = new Date(date.getMilliseconds() + 604800000)
-            let sessionId = md5(Math.floor(Math.random(Date.now())))
+            let sessionId = md5(Math.floor(Math.random(100)))
             // create a new auth cookie
 
 
