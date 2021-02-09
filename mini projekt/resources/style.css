@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    background-color: #001122;
+    color: white
+}
+
+#header {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid;
+    background-color: #002244;
+}
+
+#content {
+    width: 900px;
+
+    margin-right: auto;
+    margin-left: auto;
+}

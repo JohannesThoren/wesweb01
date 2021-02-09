@@ -1,0 +1,33 @@
+.post {
+    margin: 20px;
+    color: white;
+    background-color: #002244;
+    border-radius: 10px;
+    border: 1px solid
+}
+
+.post_header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+}
+
+.post_title {
+    text-decoration: underline;
+    font-size: 2em
+}
+
+.post_author {
+    text-align: right
+}
+
+.post_content {
+    background-color: #14283a;
+    padding: 10px;
+}
+
+.post_footer {
+    font-size: 0.8em;
+    color: grey;
+    padding: 10px;
+}

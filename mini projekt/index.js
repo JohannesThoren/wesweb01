@@ -54,6 +54,7 @@ a profile will contain
  *   an email
  *   real name
  *   age
+ *   session id
 =======================
 */
 
@@ -65,44 +66,37 @@ const userSchema = new moon.Schema({
     email: String,
     age: Number,
     sessionId: String,
-    sessionExpireDate: Number,
 })
 
 
 const postSchema = new moon.Schema({
-    sender_id: String,
+    user: String,
+    title: String,
     post: String,
     date: Date,
+    tag: String,
 })
 
 let User = moon.model("User", userSchema);
 let Post = moon.model("Post", postSchema);
 
-User.create({
-    username: 'test4',
-    password: md5('123'),
-    firstName: 'Test',
-    sureName: 'Testsson',
-    email: 'Test@Test.Test',
-    age: 1,
-    sessionId: '123',
-    sessionExpireDate: null
-})
+// Post.create({
+//     user: 'test4',
+//     title: 'hej',
+//     post: 'hejsan!',
+//     date: Date.now(),
+//     tag: "hello"
+// })
 
-
-// just home............
-app.get('/', (req, res) => {
-    res.redirect("/index")
-})
-
-app.get('/index', (req, res) => {
-    res.render('home')
-})
-
-// new user
-app.get('/index/new', (req, res) => {
-
-})
+// User.create({
+//     username: 'test4',
+//     password: md5('123'),
+//     firstName: 'Test',
+//     sureName: 'Testsson',
+//     email: 'Test@Test.Test',
+//     age: 1,
+//     sessionId: null,
+// })
 
 function validateCookie(req, res, next) {
     const { cookies } = req
@@ -110,22 +104,67 @@ function validateCookie(req, res, next) {
 
     let sessionIdCookie = 'sessionId' in cookies
 
-    console.log(sessionIdCookie)
-
-    if ('sessionId' in cookies) {
+    // checks if client has a cookie amd throws status 200
+    // if not throws status 403
+    if ('sessionId' in cookies && 'userId' in cookies) {
         if (User.find({ 'sessionId': 'sessionId' in cookies })) {
-            res.status(200).redirect('home')
+            next()
         }
     }
     else {
-        res.status(403).render('signin')
+        res.status(403).redirect("/index/signIn")
     }
-    next()
 }
 
-// sign in
-app.get('/index/signIn', validateCookie, (req, res) => {
 
+// just home............
+app.get('/', validateCookie, (req, res) => {
+    res.redirect("/index")
+})
+
+app.get('/index', validateCookie, (req, res) => {
+    Post.find({}, (err, posts) => {
+        User.findById(res.cookie.userId, (err, user) => {
+            
+            res.render('home', {posts:posts, user:user})
+        })
+    })
+}) 
+
+app.get('/index/signUp', (req, res) => {
+    res.render('signup')
+})
+
+app.post('/index/signUp', (req, res) => {
+    
+    let username = req.body.username
+    let password = req.body.password
+    let re_password = req.body.re_password
+    let name = req.body.name
+    let surename = req.body.surename
+    let email = req.body.email
+    let age = req.body.age
+
+    if (username != '' && password.length >= 8 && password == re_password) {
+        User.create({
+            username: username,
+            password: md5(password),
+            firstName: name,
+            sureName: surename,
+            email: email,
+            age: age,
+            sessionId: null,
+        })
+    }
+
+
+
+    res.redirect('/index/signIn')
+})
+
+// sign in
+app.get('/index/signIn', (req, res) => {
+    res.render('signin')
 })
 
 app.post('/index/signIn', (req, res) => {
@@ -137,7 +176,7 @@ app.post('/index/signIn', (req, res) => {
     User.findOne({ username: username }, (err, currentUser) => {
 
         if (err) {
-            console.log("x");
+            res.send(err)
         }
 
         // check password and username if it is correct
@@ -148,42 +187,31 @@ app.post('/index/signIn', (req, res) => {
                 // TODO Check if this works
                 let date = new Date
                 let expDate = new Date(date.getMilliseconds() + 604800000)
-
-                console.log(expDate)
-
                 // create a new auth cookie
                 res.cookie('sessionId', md5(Math.floor(Math.random(Date.now()))), { maxAge: expDate })
-
-                // update the experation date of the cookie in the database
-                User.findByIdAndUpdate(currentUser._id, { sessionExpireDate: expDate })
-
+                console.log(currentUser._id)
+                res.cookie('userId', currentUser._id, { maxAge: expDate })
             }
             else {
-                console.log("ERROR!");
+                console.log("ERROR! wrong password or username");
             }
         }
         catch (err) {
             console.log(err)
         }
-        console.log(req.body)
-        res.redirect('home')
+        res.redirect('/index')
     });
 
 
 })
 
-// home... just signed in lol
-app.get('/index/:id', (req, res) => {
-    res.render('home')
-})
-
 // the user profile
-app.get('/index/:id/profile', (req, res) => {
-
-})
+// app.get('/index/:id', (req, res) => {
+//     res.render('profile', { data: data })
+// })
 
 // edit user
-app.get('/index/:id/edit', (req, res) => {
+app.get('/index/:id/edit', validateCookie, (req, res) => {
 
 })
 
@@ -192,29 +220,44 @@ app.put('/index/:id/edit', (req, res) => {
 })
 
 // delete user
-app.get('/index/:id/delete', (req, res) => {
+app.get('/index/:id/delete', validateCookie, (req, res) => {
 
 })
 
 app.delete('/index/:id', (req, res) => {
 
+    User.findById(req.params.id, (err, data) => {
+        console.log(id)
+
+        res.render('profile', {profile: data})
+    })
+
+
+})
+// new post
+app.get('/index/:id/posts/new', validateCookie, (req, res) => {
+
+})
+
+app.post('/index/:id/posts/new', validateCookie, (req, res) => {
+
 })
 
 // edit post
-app.get('/index/:id/post/:post_id/edit', (req, res) => {
+app.get('/index/:id/posts/:post_id/edit', validateCookie, (req, res) => {
 
 })
 
-app.put('/index/:id/post/:post_id/edit', (req, res) => {
+app.put('/index/:id/posts/:post_id/edit', (req, res) => {
 
 })
 
 // delete  post
-app.get('/index/:id/post/:post_id/delete', (req, res) => {
+app.get('/index/:id/posts/:post_id/delete', validateCookie, (req, res) => {
 
 })
 
-app.delete('/index/:id/post/:post_id', (req, res) => {
+app.delete('/index/:id/posts/:post_id', (req, res) => {
 
 })
 
