@@ -90,15 +90,15 @@ let Post = moon.model("Post", postSchema);
 //     title: "hejsan"
 // })
 
-// User.create({
-//     username: 'test4',
-//     password: md5('123'),
-//     firstName: 'Test',
-//     sureName: 'Testsson',
-//     email: 'Test@Test.Test',
-//     age: 1,
-//     sessionId: null,
-// })
+User.create({
+    username: 'John',
+    password: md5('12345678'),
+    firstName: 'John',
+    sureName: 'Doe',
+    email: 'john.doe@bulletin.net',
+    age: 1,
+    sessionId: null,
+})
 
 function validateCookie(req, res, next) {
     const { cookies } = req
@@ -127,11 +127,30 @@ app.get('/', validateCookie, (req, res) => {
 app.get('/index', validateCookie, (req, res) => {
     const { cookies } = req
 
-    Post.find({}, (err, posts) => {
-        User.findById(cookies.userId, (err, user) => {
-            res.render('home', { posts: posts, user: user })
+    let tag = req.query.tag
+    console.log(tag)
+
+    if (tag == "" || tag == undefined) {
+        Post.find({}, (err, posts) => {
+            User.findById(cookies.userId, (err, user) => {
+                res.render('home', { posts: posts, user: user })
+            })
         })
-    })
+    }
+
+    else {
+        Post.find({ tag: tag }, (err, posts) => {
+            User.findById(cookies.userId, (err, user) => {
+                res.render('home', { posts: posts, user: user })
+            })
+        })
+    }
+})
+
+app.post('/index', (req, res) => {
+    let tag = req.body.tag
+
+    res.redirect(`/index?tag=${tag}`)
 })
 
 app.get('/index/signUp', (req, res) => {
@@ -189,7 +208,8 @@ app.post('/index/signIn', (req, res) => {
             // TODO Check if this works
             let date = new Date
             let expDate = new Date(date.getMilliseconds() + 604800000)
-            let sessionId = md5(Math.floor(Math.random(100)))
+
+            let sessionId = md5(Math.random(Date.prototype.getMilliseconds))
             // create a new auth cookie
 
 
@@ -235,15 +255,14 @@ app.get('/index/:id/delete', validateCookie, (req, res) => {
 
 })
 
-app.delete('/index/:id', (req, res) => {
+app.get('/index/:id', (req, res) => {
+    const { cookies } = req
 
-    User.findById(req.params.id, (err, data) => {
-        console.log(id)
-
-        res.render('profile', { profile: data })
+    User.findById(req.params.id, (err, profile) => {
+        User.findById(cookies.userId, (err, user) => {
+            res.render('profile', { profile: profile,  user:user})
+        })
     })
-
-
 })
 // new post
 app.get('/index/:id/posts/new', validateCookie, (req, res) => {

@@ -1,16 +1,16 @@
 .post {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 20px;
+    margin: 1.25rem;
     color: white;
     background-color: #002244;
-    border-radius: 10px;
-    border: 1px solid
+    border-radius: 0.625rem;
+    border: 0.0625rem solid
 }
 
 .post_header {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 10px;
+    padding: 0.625rem;
 }
 
 .post_title {
@@ -25,9 +25,10 @@
 
 .post_content {
     background-color: #555555;
-    padding: 10px;
+    padding: 0.625rem;
     text-align: left;
     font-size: 1.5em;
+    overflow-wrap: break-word;
 }
 
 .post_footer {
@@ -35,7 +36,7 @@
     grid-template-columns: 1fr 1fr;
     font-size: 0.8em;
     color: grey;
-    padding: 10px;
+    padding: 0.625rem;
     text-align: left;
 }
 

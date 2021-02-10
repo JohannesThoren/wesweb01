@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div id="header">
+        <a href="/index/<%=user._id%>">
+            <%= user.username %>
+        </a>
+        <a id="home" href="/">Bulletin</a>
+        <div id="control_bar">
+            <a href="/index/signOut"><button>Sign Out</button></a>
+        </div>
+    </div>
+    
+    <h1><%= profile.username%></h1>
+
+
+</body>
+</html>

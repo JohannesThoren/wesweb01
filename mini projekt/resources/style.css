@@ -7,22 +7,29 @@ body {
 #header {
     color: white;
     font-size: 1.5em;
-    padding: 10px;
+    padding: 0.625rem;
     display:grid;
-    grid-template-columns: 1fr 1fr;
-    border-bottom: 1px solid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 0.0625rem solid;
     background-color: #002244;
 }
 
-#content {
-    width: 900px;
+#header #home {
+    text-align: center;
+    font-size: 1.5em;
+    color: white;
+    text-decoration: none;
+}
 
-    margin-top: 50px;
+#content {
+    width: 56.25rem;
+
+    margin-top: 3.125rem;
     margin-right: auto;
     margin-left: auto;
 
-    border: 1px solid white;
-    border-radius: 10px;
+    border: 0.0625rem solid white;
+    border-radius: 0.625rem;
 
     text-align: center;
 
