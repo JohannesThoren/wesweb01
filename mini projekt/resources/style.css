@@ -10,6 +10,7 @@ body {
 }
 
 input {
+    padding: 5px; 
     background-color: #002244;
     margin: 0.3125rem;
     font-size: 1.4em;
@@ -33,6 +34,15 @@ button {
 
 button:hover {
     background-color: #004466
+}
+
+textarea {
+    padding: 5px; 
+    color: white;
+    background: #002244;
+    font-size: 1.4em;
+    width: 90%;
+    border-radius: 10px;
 }
 
 #header {
@@ -65,6 +75,7 @@ button:hover {
     text-align: center;
 
     background-color: #24283a;
+    padding: 10px
 }
 
 #control_bar {
@@ -74,9 +85,11 @@ button:hover {
 @media all and (max-width: 800px) {
     #content {
         margin: 0;
+        margin-right: auto;
+        margin-left: auto;
         border: none;
         border-radius: 0;
-        width: 100%;
+        width: 90%;
     }
 
     #content h1 {
