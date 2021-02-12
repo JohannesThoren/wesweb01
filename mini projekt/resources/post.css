@@ -1,5 +1,4 @@
 .post {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 1.25rem;
     color: white;
     background-color: #002244;
@@ -14,7 +13,7 @@
 }
 
 .post_title {
-    text-decoration: underline;
+    font-weight: 700;
     font-size: 2em;
     text-align: left;
 }
@@ -34,12 +33,12 @@
 .post_footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    font-size: 0.8em;
+    font-size: 0.6em;
     color: grey;
     padding: 0.625rem;
     text-align: left;
 }
 
 .post_date {
-    text-align: center;
+    text-align: right;
 }

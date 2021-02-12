@@ -1,13 +1,20 @@
-#sign_in_box {
-    width: 21.875rem;
+#sign_up_box {
+    width: 30%;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
+    text-align: left;
     background-color: #002244;
     padding: 0.625rem;
     border: solid 0.0625rem white;
     border-radius: 0.625rem;
     margin-top: 10%;
+    text-align: center;
 }
 
-
+input {
+    width: 60%;
+}
+#btn {
+    margin: 1.25rem;
+    width: 20%
+}

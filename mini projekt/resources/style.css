@@ -1,7 +1,38 @@
+a {
+    color: white;
+}
+
 body {
+    font-family: 'Courier New', Courier, monospace;
     margin: 0;
     background-color: #001122;
     color: white
+}
+
+input {
+    background-color: #002244;
+    margin: 0.3125rem;
+    font-size: 1.4em;
+    border: none;
+    border: 0.0625rem solid white;
+    border-radius: 0.3125rem;
+    color: white
+}
+
+input:hover {
+    background-color: #004466
+}
+
+button {
+    color: white;
+    background-color: #002244;
+    border: 0.0625rem solid white;
+    border-radius: 0.3125rem;
+    font-size: 1.4em;
+}
+
+button:hover {
+    background-color: #004466
 }
 
 #header {
@@ -22,7 +53,7 @@ body {
 }
 
 #content {
-    width: 56.25rem;
+    width: 80%;
 
     margin-top: 3.125rem;
     margin-right: auto;
@@ -39,3 +70,4 @@ body {
 #control_bar {
     text-align: right;
 }
+
