@@ -62,7 +62,7 @@ const userSchema = new moon.Schema({
     username: String,
     password: String,
     firstName: String,
-    sureName: String,
+    surName: String,
     email: String,
     age: Number,
     sessionId: String,
@@ -94,7 +94,7 @@ let Post = moon.model("Post", postSchema);
 //     username: 'John',
 //     password: md5('12345678'),
 //     firstName: 'John',
-//     sureName: 'Doe',
+//     surName: 'Doe',
 //     email: 'john.doe@bulletin.net',
 //     age: 1,
 //     sessionId: null,
@@ -177,7 +177,7 @@ app.post('/index/signUp', (req, res) => {
             username: username,
             password: md5(password),
             firstName: name,
-            sureName: surname,
+            surName: surname,
             email: email,
             age: age,
             sessionId: null,
@@ -186,17 +186,19 @@ app.post('/index/signUp', (req, res) => {
     else {
 
         // TODO fix this shit lmao
-        if (password.length < 8) {
+        // this is just a place holder!!!!
+        if (username == '') {
+            res.send("pleas enter a username!")
+        }
 
+        if (password.length < 8) {
+            res.send("The password has to be 8 characters long!")
         }
 
         if (password != re_password) {
-
+            res.send("Password don't match")
         }
 
-        if (username == '') {
-
-        }
     }
 
 
@@ -240,15 +242,18 @@ app.post('/index/signIn', (req, res) => {
                 // update the session id
 
                 await User.findByIdAndUpdate(currentUser._id, { sessionId: sessionId })
+
+                res.redirect('/index')
             }
+
             // TODO fix!!! 
             // display an error that the username or password is wrong
             else {
-                res.redirect('/index')
+                res.send("username or password do not match any user!")
             }
         }
         else {
-            res.redirect('/index')
+            res.send("username or password do not match any user!")
         }
     });
 
@@ -264,19 +269,58 @@ app.get('/index/signOut', (req, res) => {
     res.redirect('/')
 })
 
-
-
 app.get('/index/:id/edit', validateCookie, (req, res) => {
-
+    User.findById(req.params.id, (err, user) => {
+        res.render('profile_edit', { user: user })
+    })
 })
 
-app.put('/index/:id/edit', (req, res) => {
+app.put('/index/:id', async (req, res) => {
 
+    if (req.body.password == req.body.re_password) {
+
+        console.log(req.body)
+
+        await User.findByIdAndUpdate(req.params.id, {
+            username: req.body.username,
+            firstName: req.body.name,
+            surName: req.body.surname,
+            email: req.body.email,
+            age: req.body.age
+        })
+
+        User.findById(req.params.id, (err, user) => {
+            Post.find({ authorId: user._id }, async (err, posts) => {
+                for (index in posts) {
+                    await Post.findByIdAndUpdate(posts[index]._id, {
+                        author: req.body.username
+                    })
+                }
+            })
+        })
+
+        res.redirect('/')
+    }
+    else {
+        res.send("password do not match!")
+    }
 })
-
-// delete user
 app.get('/index/:id/delete', validateCookie, (req, res) => {
+    res.render('profile_delete', { id: req.params.id })
+})
+// delete user
+app.delete('/index/:id', validateCookie, (req, res) => {
+    User.findById(req.params.id, async (err, user) => {
+        Post.find({ authorId: user._id }, async (err, posts) => {
+            for (index in posts) {
+                await Post.findByIdAndDelete(posts[index]._id, (err) => { if (err) console.log(err) })
+            }
+        })
 
+        await User.findByIdAndDelete(req.params.id, (err) => {
+            res.redirect('/index')
+        })
+    })
 })
 
 app.get('/index/:id', (req, res) => {
@@ -303,6 +347,7 @@ app.post('/index/:id/posts/new', validateCookie, (req, res) => {
     let tag = req.body.tag
     let userId = cookies.userId
 
+    tag = tag.replace('#', '')
 
     User.findById(userId, (err, user) => {
         Post.create({
@@ -322,20 +367,38 @@ app.post('/index/:id/posts/new', validateCookie, (req, res) => {
 
 // edit post
 app.get('/index/:id/posts/:post_id/edit', validateCookie, (req, res) => {
-
+    let authorId = req.params.id
+    let postId = req.params.post_id
+    Post.findById(postId, (err, post) => {
+        console.log(post)
+        res.render('post_edit', { post: post, authorId: authorId })
+    })
 })
 
-app.put('/index/:id/posts/:post_id/edit', (req, res) => {
+app.put('/index/:id/posts/:post_id/', async (req, res) => {
+    let post_text = req.body.text
+    let post_title = req.body.title
+    let post_tag = req.body.tag
 
+    await Post.findByIdAndUpdate(req.params.post_id, {
+        title: post_title,
+        post: post_text,
+        tag: post_tag,
+        date: Date.now()
+    })
+
+    res.redirect('/index')
 })
 
 // delete  post
 app.get('/index/:id/posts/:post_id/delete', validateCookie, (req, res) => {
-
+    res.render('post_delete', { post_id: req.params.post_id, authorId: req.params.id })
 })
 
 app.delete('/index/:id/posts/:post_id', (req, res) => {
-
+    Post.findByIdAndDelete(req.params.post_id, (err) => {
+        res.redirect('/index')
+    })
 })
 
 // starting the server

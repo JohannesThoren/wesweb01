@@ -17,8 +17,11 @@
         <a id="home" href="/">Bulletin</a>
         <div id="control_bar">
             <a href="/index/signOut"><button>Sign Out</button></a>
+            <a href="/index/<%=user._id%>/edit"><button>Settings</button></a>
         </div>
     </div>
+
+ 
 
     <div id="content">
         <h1>All posts by <%=profile.username%>
@@ -29,9 +32,13 @@
                     <span class="post_title">
                         <%= posts[index].title %>
                     </span>
+                    <% if (user._id == posts[index].authorId) { %> 
+                        <a class="post_edit_btn" href="/index/<%=user._id%>/posts/<%=posts[index]._id%>/edit"><button>Edit</button></a>
+                    <% } else {%> 
                     <a class="post_author" href="/index/<%= posts[index].authorId %>">
                         <%= posts[index].author %>
                     </a>
+                    <% } %> 
                 </div>
                 <div class="post_content">
                     <p>

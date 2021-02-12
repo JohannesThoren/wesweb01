@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/signup.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div id="sign_up_box">
+        <h1>Edit</h1>
+        <form action="/index/<%= user._id %>?_method=PUT" method="POST">
+
+            <input type="text" name="username" placeholder="Username" value="<%= user.username %> "><br>
+            <input type="text" name="name" placeholder="Firstname" value="<%= user.firstName %>" ><br>
+            <input type="text" name="surname" placeholder="Surname" value="<%= user.surName %>"><br>
+            <input type="email" name="email" placeholder="E-mail" value="<%= user.email %>"><br>
+            <input type="number" name="age" placeholder="Age" value="<%= user.age %>"><br>
+            <input id="btn" type="submit" value="Save">
+
+        </form>
+
+        <p>if you want to change your password make a post telling us you want to change it and tag it with "passwordChange" and we will contact you by email</p>
+    
+        <a href="/index/<%= user._id %>/delete"><button>Delete Account</button></a>
+    </div>
+</body>
+
+</html>
