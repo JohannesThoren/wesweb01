@@ -18,3 +18,10 @@ input {
     margin: 1.25rem;
     width: 20%
 }
+
+
+@media all and (max-width: 800px) {
+    #sign_up_box {
+        width: 90%;
+    }
+}
