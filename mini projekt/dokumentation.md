@@ -60,7 +60,7 @@ Post schemat innehåller
 
 ---
 
-## Validate Cookie functionen och SessionId
+## Validate Cookie funktionen och SessionId
 Funktionen som håller koll på alla sessioner och checkar om en användare är inloggad kallas
 `validateCookie`
 
@@ -91,12 +91,15 @@ function validateCookie(req, res, next) {
 }
 ```
 
-Den börjar med att hämta alla kakor (cookies) från den request man gör till servern/sidan. Sedan så checkar `validateCookie` om kakan `sessionId` och `userId` kakorna finns. och om de stämmer med den data som finns i databasen. Om den inte stämmer eller om kakorna inte finns så blir användaren skickad vidare til `/index/signIn` där man blir tvingad att logga in eller skapa ett konto. 
+Den börjar med att hämta alla kakor (cookies) från den request man gör till servern/sidan. Sedan så checkar `validateCookie` om kakorna `sessionId` och `userId` finns och om de stämmer med den data som finns i databasen. Om den inte stämmer eller om kakorna inte finns så blir användaren skickad vidare til `/index/signIn` där man blir tvingad att logga in eller skapa ett konto. 
 
 ### sessionId
-För att förklara `sessionId` så ä det en string som skapas vid varje inloggning, den sparas på databasen och kollas på varje del av sidan jämnt emot de som databasen har sparat. `sessionId` finns för att en användare inte ska behöva autentisera sig så fort man ska göra något så som
+För att förklara `sessionId` så ä det en `string` som skapas vid varje inloggning, den sparas på databasen och kollas på varje del av sidan jämnt emot de som databasen har sparat. `sessionId` finns för att en användare inte ska behöva autentisera sig så fort man ska göra något så som
 - att göra ett inlägg
 - ändra i konto inställningarna
 - kolla in en annan profil
 - m.m
 ---
+
+# Disclaimer
+Det finns delar av koden som man kan skriva på olika sätt, dels för att optimera men också för att göra den enklare att läsa. men nu har jag valt att göra på detta sätt, men känn dig välkommen att förbättra och förändra koden.
