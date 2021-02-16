@@ -39,15 +39,29 @@ button:hover {
 textarea {
     padding: 5px; 
     color: white;
-
-
-
-
     
     background: #002244;
     font-size: 1.4em;
     width: 90%;
     border-radius: 10px;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    text-align: center;
+    border: solid 1px;
+}
+
+td {
+    padding: 5px;
+    border: 1px solid;
+}
+
+th {
+    padding: 5px;
+    border: 1px solid
 }
 
 #header {
@@ -87,7 +101,7 @@ textarea {
     text-align: right;
 }
 
-@media all and (max-width: 800px) {
+@media all and (max-width: 1000px) {
     #content {
         margin: 0;
         margin-right: auto;
@@ -95,6 +109,7 @@ textarea {
         border: none;
         border-radius: 0;
         width: 90%;
+        margin-bottom: 10px;
     }
 
     #content h1 {
@@ -108,5 +123,15 @@ textarea {
     button {
         margin: 5px;
     }
+
+    table {
+        width: 100%;
+        font-size: 0.6em;
+    }
+
+    td {
+        overflow: hidden;
+    }
+
 
 }

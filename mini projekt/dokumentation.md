@@ -101,5 +101,9 @@ För att förklara `sessionId` så ä det en `string` som skapas vid varje inlog
 - m.m
 ---
 
+
+
+---
+
 # Disclaimer
 Det finns delar av koden som man kan skriva på olika sätt, dels för att optimera men också för att göra den enklare att läsa. men nu har jag valt att göra på detta sätt, men känn dig välkommen att förbättra och förändra koden.

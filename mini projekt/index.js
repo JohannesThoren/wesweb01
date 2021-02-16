@@ -171,38 +171,46 @@ app.post('/index/signUp', (req, res) => {
     let email = req.body.email
     let age = req.body.age
 
-    if (username != '' && password.length >= 8 && password == re_password) {
-        User.create({
-            username: username,
-            password: md5(password),
-            firstName: name,
-            surName: surname,
-            email: email,
-            age: age,
-            sessionId: null,
-        })
-    }
-    else {
+    User.findOne({ username: username }, (err, user) => {
+        if (user) {
 
-        // TODO fix this shit lmao
-        // this is just a place holder!!!!
-        if (username == '') {
-            res.send("pleas enter a username!")
+            res.status(403).send("A user with that name already exists already exists!")
         }
+        else {
 
-        if (password.length < 8) {
-            res.send("The password has to be 8 characters long!")
+            if (username != '' && password.length >= 8 && password == re_password) {
+                User.create({
+                    username: username,
+                    password: md5(password),
+                    firstName: name,
+                    surName: surname,
+                    email: email,
+                    age: age,
+                    sessionId: null,
+                })
+
+                res.redirect('/index/signIn')
+            }
+            else {
+
+                // TODO fix this shit lmao
+                // this is just a place holder!!!!
+                if (username == '') {
+                    res.send("pleas enter a username!")
+                }
+                else if (password.length < 8) {
+                    res.send("The password has to be 8 characters long!")
+                }
+
+                else if (password != re_password) {
+                    res.send("Password don't match")
+                }
+                else {
+                    res.redirect('/index')
+                }
+            }
         }
-
-        if (password != re_password) {
-            res.send("Password don't match")
-        }
-
-    }
-
-
-
-    res.redirect('/index/signIn')
+    });
 })
 
 // sign in

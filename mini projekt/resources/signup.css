@@ -20,7 +20,7 @@ input {
 }
 
 
-@media all and (max-width: 800px) {
+@media all and (max-width: 1000px) {
     #sign_up_box {
         width: 90%;
     }
