@@ -336,6 +336,7 @@ app.get('/index/:id', (req, res) => {
     User.findById(req.params.id, (err, profile) => {
         User.findById(cookies.userId, (err, user) => {
             Post.find({ authorId: profile._id }, (err, posts) => {
+                console.log(`${user._id}\t${profile._id}`)
                 res.render('profile', { profile: profile, user: user, posts: posts })
             })
         })
