@@ -1,21 +1,49 @@
+
 - [Bulletin documentation (OBS! Written in Swedish)](#bulletin-documentation-obs-written-in-swedish)
+  - [Planeringen](#planeringen)
+  - [Wireframe](#wireframe)
+- [Koden](#koden)
   - [User and Post schema](#user-and-post-schema)
       - [User schema](#user-schema)
       - [Post schema](#post-schema)
-  - [Validate Cookie functionen och SessionId](#validate-cookie-functionen-och-sessionid)
+  - [Validate Cookie funktionen och SessionId](#validate-cookie-funktionen-och-sessionid)
     - [sessionId](#sessionid)
+- [Disclaimer](#disclaimer)
 
-# Bulletin documentation (OBS! Written in Swedish)
-Detta är dokumentationen av mini projektent som vi har gjort i wesweb 01.
-Denna dokumentation är skriven på svenska för att underlätta en del saker.
 
 ---
+
+# Bulletin documentation (OBS! Written in Swedish)
+Detta är dokumentationen av mini projektet som vi har gjort i wesweb 01 och weuweb 01.
+Denna dokumentation är skriven på svenska för att underlätta en del saker.
+
+## Planeringen
+i början så hade jag ingen riktig planering, jag körde bara på och märkte till slut att det inte funkade. jag var fast på samma sak i 1,5 vecka.
+så jag blev tvungen att lägga fram en plan som såg ut såhär.
+
+- göra så att session grejerna funkar
+- fixa så att man kan lägga upp, redigera och ta bort inlägg.
+- göra så att man kan redigera och ta bort sin profil.
+- göra så att sidan ser bra ut med css.
+- göra så att man kan kolla på andra personers profiler.
+- filtrera efter tag
+- förbättra saker (om det finns tid över)
+
+jag tycker att jag höll mig till detta ganska bra, kastade om lite saker såklart men det blev bra tillslut. 
+
+## Wireframe
+jag gjorde aldrig en jätte bra wireframe, hade lite svårt att få ner min idé på papper. Men fick dock fram en wireframe 
+
+![wireframe](https://lh6.googleusercontent.com/H9x2lOAZsGdLKzkpcGd3zUwPGAVGb3gG_c_53OoAVTzgmqw9QpqezBk9LVHgdAeOAiXK8dLN64ZJ-RvZbkKRZ1RKjFtIgf6LpUR9-ZBJT9zBylzs8B_zp6yaWqFoUb24hDKoGr9v)
+# Koden
+täckte presentera lite utav koden från sidan samt lite annat som har med koden att göra. 
+
 ## User and Post schema
 Det finns två stycken schemas en/ett för användare och en/ett för inlägg (posts)
 
 
 ####  User schema
-Användar schemat ser ut pǻ följande sätt
+Användar schemat ser ut på följande sätt
 
 ```javascript
 const userSchema = new moon.Schema({
@@ -99,10 +127,7 @@ För att förklara `sessionId` så ä det en `string` som skapas vid varje inlog
 - ändra i konto inställningarna
 - kolla in en annan profil
 - m.m
----
-
-
-
+  
 ---
 
 # Disclaimer
