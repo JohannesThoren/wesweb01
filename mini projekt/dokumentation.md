@@ -9,6 +9,7 @@
   - [Validate Cookie funktionen och SessionId](#validate-cookie-funktionen-och-sessionid)
     - [sessionId](#sessionid)
 - [Disclaimer](#disclaimer)
+      - [Mer kommer snart!](#mer-kommer-snart)
 
 
 ---
@@ -36,7 +37,7 @@ jag gjorde aldrig en jätte bra wireframe, hade lite svårt att få ner min idé
 
 ![wireframe](https://lh6.googleusercontent.com/H9x2lOAZsGdLKzkpcGd3zUwPGAVGb3gG_c_53OoAVTzgmqw9QpqezBk9LVHgdAeOAiXK8dLN64ZJ-RvZbkKRZ1RKjFtIgf6LpUR9-ZBJT9zBylzs8B_zp6yaWqFoUb24hDKoGr9v)
 # Koden
-täckte presentera lite utav koden från sidan samt lite annat som har med koden att göra. 
+Tänkte presentera lite utav koden från sidan samt lite annat som har med koden att göra. 
 
 ## User and Post schema
 Det finns två stycken schemas en/ett för användare och en/ett för inlägg (posts)
@@ -132,3 +133,5 @@ För att förklara `sessionId` så ä det en `string` som skapas vid varje inlog
 
 # Disclaimer
 Det finns delar av koden som man kan skriva på olika sätt, dels för att optimera men också för att göra den enklare att läsa. men nu har jag valt att göra på detta sätt, men känn dig välkommen att förbättra och förändra koden.
+
+#### Mer kommer snart!
